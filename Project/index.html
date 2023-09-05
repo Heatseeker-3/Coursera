@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GenerateBill</title>
+    <meta charset= "UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./semantic.css">
+    <style>
+        h1{
+            text-align: center;
+        }
+        .scrollable-table::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .scrollable-table::-webkit-scrollbar-track {
+            background: #f9fafb; /*#f1f1f1;*/
+        }
+
+        .scrollable-table::-webkit-scrollbar-thumb {
+            background: #000000;/*#888;*/
+            border-radius: 6px;
+        }
+
+            .scrollable-table::-webkit-scrollbar-thumb:hover {
+                background: #ff6a00; /*#555;*/
+            }
+
+        th, td {
+            text-align: center;
+        }
+
+        .positive {
+            color: green;
+        }
+
+        .negative {
+            color: red;
+        }
+
+        .scrollable-table {
+            /*height: 500px;*/
+            max-height: 550px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+<section style="padding-top: 10px;">
+    <h1>BILLING SAMPLE</h1>
+    <div class="ui container mt-4">
+        <div class="scrollable-table">
+            <table class="ui celled table">
+                <thead>
+                   <tr>
+    <th class="text-center">BILLING MONTH</th> <!-- 1 -->
+    <th class="text-center">SITE CATEGORY1</th> <!-- 2 -->
+    <th class="text-center">SITE CATEGORY2</th> <!-- 3 -->
+    <th class="text-center">SITE ID</th> <!-- 4 -->
+    <th class="text-center">STATE</th> <!-- 5 -->
+    <th class="text-center">SITES</th> <!-- 6 -->
+    <th class="text-center">PACKAGE</th> <!-- 7 -->
+    <th class="text-center">PACKAGE TYPE</th> <!-- 8 -->
+    <th class="text-center">NTC DATE</th> <!-- 9 -->
+    <th class="text-center">UAT DATE</th> <!-- 10 -->
+    <th class="text-center">Final 95th Percentile (Mbps)</th> <!-- 11 -->
+    <th class="text-center">TYPE OF CHARGES</th> <!-- 12 -->
+    <th class="text-center">TYPE OF TAX</th> <!-- 13 -->
+    <th class="text-center">QTTY</th> <!-- 14 -->
+    <th class="text-center">START DATE</th> <!-- 15 -->
+    <th class="text-center">END DATE</th> <!-- 16 -->
+    <th class="text-center">FRACTION OF YEAR</th> <!-- 17 -->
+    <th class="text-center">DAYS</th> <!-- 18 -->
+    <th class="text-center">OTC RM</th> <!-- 19 -->
+    <th class="text-center">PRICE RM</th> <!-- 20 -->
+    <th class="text-center">FIXED CHARGES 1 RM</th> <!-- 21 -->
+    <th class="text-center">PRICE RENTAL RM</th> <!-- 22 -->
+    <th class="text-center">RENTAL RM</th> <!-- 23 -->
+    <th class="text-center">PAYU/Mbps RM</th> <!-- 24 -->
+    <th class="text-center">PAYU RM</th> <!-- 25 -->
+    <th class="text-center">PRICE PAYU LINK 2 RM</th> <!-- 26 -->
+    <th class="text-center">PAYU LINK 2 RM</th> <!-- 27 -->
+    <th class="text-center">PAYU ACTUAL RM</th> <!-- 28 -->
+    <th class="text-center">PAYU CHARGE RM</th> <!-- 29 -->
+    <th class="text-center">TOTAL RM</th> <!-- 30 -->
+    <th class="text-center">TAX 6%</th> <!-- 31 -->
+    <th class="text-center">GRAND TOTAL RM</th> <!-- 32 -->
+</tr>
+
+                </thead>
+                <tbody>
+                   <tr>
+    <td id="row1A">Jun-23</td> <!-- 1 -->
+    <td id="row2A">A1</td> <!-- 2 -->
+    <td id="row3A">C2A</td> <!-- 3 -->
+    <td id="row4A">483211</td> <!-- 4 -->
+    <td id="row5A">JOHOR</td> <!-- 5 -->
+    <td id="row6A">SITEA</td> <!-- 6 -->
+    <td id="row7A">P2a - 99.7%</td> <!-- 7 -->
+    <td id="row8A">10 Mbps + 100 Mbps</td> <!-- 8 -->
+    <td id="row9A">20-Jan-23</td> <!-- 9 -->
+    <td id="row10A">20-May-23</td> <!-- 10 -->
+    <td id="row11A">9.5678</td> <!-- 11 -->
+    <td id="row12A">PAYU</td> <!-- 12 -->
+    <td id="row13A">ST</td> <!-- 13 -->
+    <td id="row14A">1</td> <!-- 14 -->
+    <td id="row15A">1-Jun-23</td> <!-- 15 -->
+    <td id="row16A">30-Jun-23</td> <!-- 16 -->
+    <td id="row17A">0.082191781</td> <!-- 17 -->
+    <td id="row18A">30</td> <!-- 18 -->
+    <td id="row19A">1,000.00</td> <!-- 19 -->
+    <td id="row20A">40,000.00</td> <!-- 20 -->
+    <td id="row21A">3,287.67</td> <!-- 21 -->
+    <td id="row22A">10,000.00</td> <!-- 22 -->
+    <td id="row23A">821.92</td> <!-- 23 -->
+    <td id="row24A">350.00</td> <!-- 24 -->
+    <td id="row25A">3,348.73</td> <!-- 25 -->
+    <td id="row26A">10,000</td> <!-- 26 -->
+    <td id="row27A">821.92</td> <!-- 27 -->
+    <td id="row28A">4,992.56</td> <!-- 28 -->
+    <td id="row29A">3,287.67</td> <!-- 29 -->
+    <td id="row30A">4,287.67</td> <!-- 30 -->
+    <td id="row31A">257.26</td> <!-- 31 -->
+    <td id="row32A">4,544.93</td> <!-- 32 -->
+</tr>
+<tr>
+    <td id="row1B">Jun-23</td> <!-- 1 -->
+    <td id="row2B">B1</td> <!-- 2 -->
+    <td id="row3B">C2B</td> <!-- 3 -->
+    <td id="row4B">400345</td> <!-- 4 -->
+    <td id="row5B">PAHANG</td> <!-- 5 -->
+    <td id="row6B">SITEB</td> <!-- 6 -->
+    <td id="row7B">P1a - 99.0%</td> <!-- 7 -->
+    <td id="row8B">1 Mbps</td> <!-- 8 -->
+    <td id="row9B">20-Jan-23</td> <!-- 9 -->
+    <td id="row10B">29-Apr-23</td> <!-- 10 -->
+    <td id="row11B">0.8112</td> <!-- 11 -->
+    <td id="row12B">PAYU</td> <!-- 12 -->
+    <td id="row13B">ST</td> <!-- 13 -->
+    <td id="row14B">1</td> <!-- 14 -->
+    <td id="row15B">1-Jun-23</td> <!-- 15 -->
+    <td id="row16B">30-Jun-23</td> <!-- 16 -->
+    <td id="row17B">0.082191781</td> <!-- 17 -->
+    <td id="row18B">30</td> <!-- 18 -->
+    <td id="row19B">0</td> <!-- 19 -->
+    <td id="row20B">0</td> <!-- 20 -->
+    <td id="row21B">0</td> <!-- 21 -->
+    <td id="row22B">9,000.00</td> <!-- 22 -->
+    <td id="row23B">739.73</td> <!-- 23 -->
+    <td id="row24B">60.00</td> <!-- 24 -->
+    <td id="row25B">48.67</td> <!-- 25 -->
+    <td id="row26B">0</td> <!-- 26 -->
+    <td id="row27B">0</td> <!-- 27 -->
+    <td id="row28B">788.40</td> <!-- 28 -->
+    <td id="row29B">788.40</td> <!-- 29 -->
+    <td id="row30B">788.40</td> <!-- 30 -->
+    <td id="row31B">47.30</td> <!-- 31 -->
+    <td id="row32B">835.70</td> <!-- 32 -->
+</tr>
+<tr>
+    <td id="row1C">Jun-23</td> <!-- 1 -->
+    <td id="row2C">C1</td> <!-- 2 -->
+    <td id="row3C">C2C</td> <!-- 3 -->
+    <td id="row4C">567889</td> <!-- 4 -->
+    <td id="row5C">WP KUALA LUMPUR</td> <!-- 5 -->
+    <td id="row6C">SITEC</td> <!-- 6 -->
+    <td id="row7C">P2c - 99.7%</td> <!-- 7 -->
+    <td id="row8C">10 Mbps + 500 Mbps</td> <!-- 8 -->
+    <td id="row9C">20-Jan-23</td> <!-- 9 -->
+    <td id="row10C">8-Jun-23</td> <!-- 10 -->
+    <td id="row11C">0.0034</td> <!-- 11 -->
+    <td id="row12C">PAYU</td> <!-- 12 -->
+    <td id="row13C">ST</td> <!-- 13 -->
+    <td id="row14C">1</td> <!-- 14 -->
+    <td id="row15C">8-Jun-23</td> <!-- 15 -->
+    <td id="row16C">30-Jun-23</td> <!-- 16 -->
+    <td id="row17C">0.063013699</td> <!-- 17 -->
+    <td id="row18C">23</td> <!-- 18 -->
+    <td id="row19C">2,000.00</td> <!-- 19 -->
+    <td id="row20C">45,000.00</td> <!-- 20 -->
+    <td id="row21C">2,835.62</td> <!-- 21 -->
+    <td id="row22C">10,000.00</td> <!-- 22 -->
+    <td id="row23C">630.14</td> <!-- 23 -->
+    <td id="row24C">200.00</td> <!-- 24 -->
+    <td id="row25C">0.68</td> <!-- 25 -->
+    <td id="row26C">13,000</td> <!-- 26 -->
+    <td id="row27C">819.18</td> <!-- 27 -->
+    <td id="row28C">1,450.00</td> <!-- 28 -->
+    <td id="row29C">1,450.00</td> <!-- 29 -->
+    <td id="row30C">3,450.00</td> <!-- 30 -->
+    <td id="row31C">207.00</td> <!-- 31 -->
+    <td id="row32C">3,657.00</td> <!-- 32 -->
+</tr>
+<tr>
+    <td id="row1D">Jun-23</td> <!-- 1 -->
+    <td id="row2D">D1</td> <!-- 2 -->
+    <td id="row3D">C2D</td> <!-- 3 -->
+    <td id="row4D">543256</td> <!-- 4 -->
+    <td id="row5D">SELANGOR</td> <!-- 5 -->
+    <td id="row6D">SITED</td> <!-- 6 -->
+    <td id="row7D">P1b - 99.7%</td> <!-- 7 -->
+    <td id="row8D">10 Mbps</td> <!-- 8 -->
+    <td id="row9D">20-Jan-23</td> <!-- 9 -->
+    <td id="row10D">20-Jun-23</td> <!-- 10 -->
+    <td id="row11D">3.8457</td> <!-- 11 -->
+    <td id="row12D">PAYU</td> <!-- 12 -->
+    <td id="row13D">ST</td> <!-- 13 -->
+    <td id="row14D">1</td> <!-- 14 -->
+    <td id="row15D">20-Jun-23</td> <!-- 15 -->
+    <td id="row16D">30-Jun-23</td> <!-- 16 -->
+    <td id="row17D">0.030136986</td> <!-- 17 -->
+    <td id="row18D">11</td> <!-- 18 -->
+    <td id="row19D">0</td> <!-- 19 -->
+    <td id="row20D">30,000.00</td> <!-- 20 -->
+    <td id="row21D">904.11</td> <!-- 21 -->
+    <td id="row22D">10,000.00</td> <!-- 22 -->
+    <td id="row23D">301.37</td> <!-- 23 -->
+    <td id="row24D">400.00</td> <!-- 24 -->
+    <td id="row25D">1,538.27</td> <!-- 25 -->
+    <td id="row26D">0</td> <!-- 26 -->
+    <td id="row27D">0</td> <!-- 27 -->
+    <td id="row28D">1,839.64</td> <!-- 28 -->
+    <td id="row29D">904.11</td> <!-- 29 -->
+    <td id="row30D">904.11</td> <!-- 30 -->
+    <td id="row31D">54.25</td> <!-- 31 -->
+    <td id="row32D">958.36</td> <!-- 32 -->
+</tr>
+
+
+</tbody>
+            </table>
+        </div>
+    </div>
+    </section>
+<section style="padding-top: 50px">
+    <h1>CALCULATIONS</h1>
+
+    <div class="ui container mt-4">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th class="text-center">Billing Month</th>
+                    <th class="text-center">Fraction</th>
+                    <th class="text-center">(1) Total Charge (RM)</th>
+                    <th class="text-center">(1) Net Total (RM)</th>
+                    <th class="text-center">Fixed Charge</th>
+                    <th class="text-center">(2) Total Charge (RM)</th>
+                    <th class="text-center">(2) Net Total (RM)</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 
+
+
+1. Maximum Hourly and 95th Percentile Bandwidth Utilization for Intranet Traffic only (raw data processing from SAMS and Traffic Log).
+2. PAYU Charge (RM) = [95th Percentile Bandwidth Utilization (Mbps) from maximum value between Inbound and Outbound * Rate per Mbps (RM)] + [Fraction * Fixed Rental (RM)]
+2. Fraction = 1/total days in a year * total days in a month
+3. PAYU charge will be compared with Fixed Charge of each service and take whichever lower.
+4. Total Charge (RM) = PAYU charge + OTC (RM)
+5. Net Total (RM) = Total Charge (RM) - LAD (RM) - Penalty (RM)
+
+
+
+1. Fixed Charge (RM) = [Fraction * Recurring Charge Yearly (RM)]
+2. Fraction = 1/total days in a year * total days in a month
+3. Total Charge (RM) = Fixed charge + OTC (RM)
+4. Net Total (RM) = Total Charge (RM) - LAD (RM) - Penalty (RM) -->
+                <!-- Fraction = 1/total days in a year * total days in a month 
+1/365*(<th class="text-center">DAYS</th> has the value)
+-->
+                <tr>
+                    <td class="text-center">Jun-23</td> <!-- Main -->
+                    <td class="text-center" id="Out1A"></td>
+                    <td class="text-center" id="Out2A"></td>
+                    <td class="text-center" id="Out3A"></td>
+                    <td class="text-center" id="Out4A"></td>
+                    <td class="text-center" id="Out5A"></td>
+                    <td class="text-center" id="Out6A"></td>
+                 
+                </tr>
+                <tr>
+                    <td class="text-center">Jun-23</td>
+                    <td class="text-center" id="Out1B"></td>
+                    <td class="text-center" id="Out2B"></td>
+                    <td class="text-center" id="Out3B"></td>
+                    <td class="text-center" id="Out4B"></td>
+                    <td class="text-center" id="Out5B"></td>
+                    <td class="text-center" id="Out6B"></td>
+                </tr>
+                <tr>
+                    <td class="text-center">Jun-23</td>
+                    <td class="text-center" id="Out1C"></td>
+                    <td class="text-center" id="Out2C"></td>
+                    <td class="text-center" id="Out3C"></td>
+                    <td class="text-center" id="Out4C"></td>
+                    <td class="text-center" id="Out5C"></td>
+                    <td class="text-center" id="Out6C"></td>
+                </tr>
+                <tr>
+                    <td class="text-center">Jun-23</td>
+                    <td class="text-center" id="Out1D"></td>
+                    <td class="text-center" id="Out2D"></td>
+                    <td class="text-center" id="Out3D"></td>
+                    <td class="text-center" id="Out4D"></td>
+                    <td class="text-center" id="Out5D"></td>
+                    <td class="text-center" id="Out6D"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+</section>
+ <script src="cal_Values.js"></script>
+
+
+
+    </body>
+</html>
+
+
