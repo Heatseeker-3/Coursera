@@ -1,344 +1,140 @@
-$(function () { // Same as document.addEventListener("DOMContentLoaded"...
 
-  // Same as document.querySelector("#navbarToggle").addEventListener("blur",...
-  $("#navbarToggle").blur(function (event) {
-    var screenWidth = window.innerWidth;
-    if (screenWidth < 768) {
-      $("#collapsable-nav").collapse('hide');
-    }
-  });
-});
+        // For the 1st row of table
+        var element1a = document.getElementById('row17A'); // day
+        var element2a = document.getElementById('row29A'); // PAYU Charge
+        var element3a = document.getElementById('row19A'); // OTC
+        var element4a = document.getElementById('row20A'); // Recurring Charge
 
-(function (global) {
-
-var dc = {};
-
-var homeHtmlUrl = "snippets/home-snippet.html";
-var allCategoriesUrl =
-  "https://davids-restaurant.herokuapp.com/categories.json";
-var categoriesTitleHtml = "snippets/categories-title-snippet.html";
-var categoryHtml = "snippets/category-snippet.html";
-var menuItemsUrl =
-  "https://davids-restaurant.herokuapp.com/menu_items.json?category=";
-var menuItemsTitleHtml = "snippets/menu-items-title.html";
-var menuItemHtml = "snippets/menu-item.html";
-
-// Convenience function for inserting innerHTML for 'select'
-var insertHtml = function (selector, html) {
-  var targetElem = document.querySelector(selector);
-  targetElem.innerHTML = html;
-};
-
-// Show loading icon inside element identified by 'selector'.
-var showLoading = function (selector) {
-  var html = "<div class='text-center'>";
-  html += "<img src='images/ajax-loader.gif'></div>";
-  insertHtml(selector, html);
-};
-
-// Return substitute of '{{propName}}'
-// with propValue in given 'string'
-var insertProperty = function (string, propName, propValue) {
-  var propToReplace = "{{" + propName + "}}";
-  string = string
-    .replace(new RegExp(propToReplace, "g"), propValue);
-  return string;
-};
-
-// Remove the class 'active' from home and switch to Menu button
-var switchMenuToActive = function () {
-  // Remove 'active' from home button
-  var classes = document.querySelector("#navHomeButton").className;
-  classes = classes.replace(new RegExp("active", "g"), "");
-  document.querySelector("#navHomeButton").className = classes;
-
-  // Add 'active' to menu button if not already there
-  classes = document.querySelector("#navMenuButton").className;
-  if (classes.indexOf("active") === -1) {
-    classes += " active";
-    document.querySelector("#navMenuButton").className = classes;
-  }
-};
-
-// On page load (before images or CSS)
-document.addEventListener("DOMContentLoaded", function (event) {
-
-// TODO: STEP 0: Look over the code from
-// *** start ***
-// to
-// *** finish ***
-// below.
-// We changed this code to retrieve all categories from the server instead of
-// simply requesting home HTML snippet. We now also have another function
-// called buildAndShowHomeHTML that will receive all the categories from the server
-// and process them: choose random category, retrieve home HTML snippet, insert that
-// random category into the home HTML snippet, and then insert that snippet into our
-// main page (index.html).
-//
-// TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML,
-// so it can be called when server responds with the categories data.
-
-// *** start ***
-// On first load, show home view
-showLoading("#main-content");
-$ajaxUtils.sendGetRequest(
-  allCategoriesUrl, 
-  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
-  true); // Explicitely setting the flag to get JSON from server processed into an object literal
-});
-// *** finish **
+        // For the 2nd row of table
+        var element1b = document.getElementById('row17B'); // day
+        var element2b = document.getElementById('row29B'); // PAYU Charge
+        var element3b = document.getElementById('row19B'); // OTC
+        var element4b = document.getElementById('row20B'); // Recurring Charge
+     
+        // For the 3rd row of table
+        var element1c = document.getElementById('row17C'); // day
+        var element2c = document.getElementById('row29C'); // PAYU Charge
+        var element3c = document.getElementById('row19C'); // OTC
+        var element4c = document.getElementById('row20C'); // Recurring Charge
+     
+        // For the 4th row of table
+        var element1d = document.getElementById('row17D'); // day
+        var element2d = document.getElementById('row29D'); // PAYU Charge
+        var element3d = document.getElementById('row19D'); // OTC
+        var element4d = document.getElementById('row20D'); // Recurring Charge
 
 
-// Builds HTML for the home page based on categories array
-// returned from the server.
-function buildAndShowHomeHTML (categories) {
-
-  // Load home snippet page
-  $ajaxUtils.sendGetRequest(
-    homeHtmlUrl,
-    function (homeHtml) {
-
-      // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
-      // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
-      // variable's name implies it expects.
-
-       var chosenCategoryShortName = chooseRandomCategory(categories).short_name;  
-
-
-      // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
-      // chosen category from STEP 2. Use existing insertProperty function for that purpose.
-      // Look through this code for an example of how to do use the insertProperty function.
-      // WARNING! You are inserting something that will have to result in a valid Javascript
-      // syntax because the substitution of {{randomCategoryShortName}} becomes an argument
-      // being passed into the $dc.loadMenuItems function. Think about what that argument needs
-      // to look like. For example, a valid call would look something like this:
-      // $dc.loadMenuItems('L')
-      // Hint: you need to surround the chosen category short name with something before inserting
-      // it into the home html snippet.
-      chosenCategoryShortName = "'" + chosenCategoryShortName + "'";
-      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
-
-
-      // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
-      // Use the existing insertHtml function for that purpose. Look through this code for an example
-      // of how to do that.
-      insertHtml("#main-content", homeHtmlToInsertIntoMainPage); 
-
-    },
-    false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
-}
-
-
-// Given array of category objects, returns a random category object.
-function chooseRandomCategory (categories) {
-  // Choose a random index into the array (from 0 inclusively until array length (exclusively))
-  var randomArrayIndex = Math.floor(Math.random() * categories.length);
-
-  // return category object with that randomArrayIndex
-  return categories[randomArrayIndex];
-}
-
-
-// Load the menu categories view
-dc.loadMenuCategories = function () {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    allCategoriesUrl,
-    buildAndShowCategoriesHTML);
-};
-
-
-// Load the menu items view
-// 'categoryShort' is a short_name for a category
-dc.loadMenuItems = function (categoryShort) {
-  showLoading("#main-content");
-  $ajaxUtils.sendGetRequest(
-    menuItemsUrl + categoryShort,
-    buildAndShowMenuItemsHTML);
-};
-
-
-// Builds HTML for the categories page based on the data
-// from the server
-function buildAndShowCategoriesHTML (categories) {
-  // Load title snippet of categories page
-  $ajaxUtils.sendGetRequest(
-    categoriesTitleHtml,
-    function (categoriesTitleHtml) {
-      // Retrieve single category snippet
-      $ajaxUtils.sendGetRequest(
-        categoryHtml,
-        function (categoryHtml) {
-          // Switch CSS class active to menu button
-          switchMenuToActive();
-
-          var categoriesViewHtml =
-            buildCategoriesViewHtml(categories,
-                                    categoriesTitleHtml,
-                                    categoryHtml);
-          insertHtml("#main-content", categoriesViewHtml);
-        },
-        false);
-    },
-    false);
-}
-
-
-// Using categories data and snippets html
-// build categories view HTML to be inserted into page
-function buildCategoriesViewHtml(categories,
-                                 categoriesTitleHtml,
-                                 categoryHtml) {
-
-  var finalHtml = categoriesTitleHtml;
-  finalHtml += "<section class='row'>";
-
-  // Loop over categories
-  for (var i = 0; i < categories.length; i++) {
-    // Insert category values
-    var html = categoryHtml;
-    var name = "" + categories[i].name;
-    var short_name = categories[i].short_name;
-    html =
-      insertProperty(html, "name", name);
-    html =
-      insertProperty(html,
-                     "short_name",
-                     short_name);
-    finalHtml += html;
-  }
-
-  finalHtml += "</section>";
-  return finalHtml;
-}
-
-
-
-// Builds HTML for the single category page based on the data
-// from the server
-function buildAndShowMenuItemsHTML (categoryMenuItems) {
-  // Load title snippet of menu items page
-  $ajaxUtils.sendGetRequest(
-    menuItemsTitleHtml,
-    function (menuItemsTitleHtml) {
-      // Retrieve single menu item snippet
-      $ajaxUtils.sendGetRequest(
-        menuItemHtml,
-        function (menuItemHtml) {
-          // Switch CSS class active to menu button
-          switchMenuToActive();
-
-          var menuItemsViewHtml =
-            buildMenuItemsViewHtml(categoryMenuItems,
-                                   menuItemsTitleHtml,
-                                   menuItemHtml);
-          insertHtml("#main-content", menuItemsViewHtml);
-        },
-        false);
-    },
-    false);
-}
-
-
-// Using category and menu items data and snippets html
-// build menu items view HTML to be inserted into page
-function buildMenuItemsViewHtml(categoryMenuItems,
-                                menuItemsTitleHtml,
-                                menuItemHtml) {
-
-  menuItemsTitleHtml =
-    insertProperty(menuItemsTitleHtml,
-                   "name",
-                   categoryMenuItems.category.name);
-  menuItemsTitleHtml =
-    insertProperty(menuItemsTitleHtml,
-                   "special_instructions",
-                   categoryMenuItems.category.special_instructions);
-
-  var finalHtml = menuItemsTitleHtml;
-  finalHtml += "<section class='row'>";
-
-  // Loop over menu items
-  var menuItems = categoryMenuItems.menu_items;
-  var catShortName = categoryMenuItems.category.short_name;
-  for (var i = 0; i < menuItems.length; i++) {
-    // Insert menu item values
-    var html = menuItemHtml;
-    html =
-      insertProperty(html, "short_name", menuItems[i].short_name);
-    html =
-      insertProperty(html,
-                     "catShortName",
-                     catShortName);
-    html =
-      insertItemPrice(html,
-                      "price_small",
-                      menuItems[i].price_small);
-    html =
-      insertItemPortionName(html,
-                            "small_portion_name",
-                            menuItems[i].small_portion_name);
-    html =
-      insertItemPrice(html,
-                      "price_large",
-                      menuItems[i].price_large);
-    html =
-      insertItemPortionName(html,
-                            "large_portion_name",
-                            menuItems[i].large_portion_name);
-    html =
-      insertProperty(html,
-                     "name",
-                     menuItems[i].name);
-    html =
-      insertProperty(html,
-                     "description",
-                     menuItems[i].description);
-
-    // Add clearfix after every second menu item
-    if (i % 2 !== 0) {
-      html +=
-        "<div class='clearfix visible-lg-block visible-md-block'></div>";
-    }
-
-    finalHtml += html;
-  }
-
-  finalHtml += "</section>";
-  return finalHtml;
-}
-
-
-// Appends price with '$' if price exists
-function insertItemPrice(html,
-                         pricePropName,
-                         priceValue) {
-  // If not specified, replace with empty string
-  if (!priceValue) {
-    return insertProperty(html, pricePropName, "");
-  }
-
-  priceValue = "$" + priceValue.toFixed(2);
-  html = insertProperty(html, pricePropName, priceValue);
-  return html;
-}
-
-
-// Appends portion name in parens if it exists
-function insertItemPortionName(html,
-                               portionPropName,
-                               portionValue) {
-  // If not specified, return original string
-  if (!portionValue) {
-    return insertProperty(html, portionPropName, "");
-  }
-
-  portionValue = "(" + portionValue + ")";
-  html = insertProperty(html, portionPropName, portionValue);
-  return html;
-}
-
-
-global.$dc = dc;
-
-})(window);
+        // Parse 1
+        var value1A = parseFloat(element1a.textContent.replace(/,/g, '')); // Fraction
+        var value2A = parseFloat(element2a.textContent.replace(/,/g, ''));
+        var value3A = parseFloat(element3a.textContent.replace(/,/g, ''));  // OTC
+        var value4A = parseFloat(element4a.textContent.replace(/,/g, '')); // Recurring Charge
+        // Parse 2
+        var value1B = parseFloat(element1b.textContent.replace(/,/g, '')); // Fraction
+        var value2B = parseFloat(element2b.textContent.replace(/,/g, ''));
+        var value3B = parseFloat(element3b.textContent.replace(/,/g, ''));
+        var value4B = parseFloat(element4b.textContent.replace(/,/g, '')); // Recurring Charge
+        // Parse 3
+        var value1C = parseFloat(element1c.textContent.replace(/,/g, ''));  // Fraction
+        var value2C = parseFloat(element2c.textContent.replace(/,/g, ''));
+        var value3C = parseFloat(element3c.textContent.replace(/,/g, ''));
+        var value4C = parseFloat(element4c.textContent.replace(/,/g, '')); // Recurring Charge
+        // Parse 4
+        var value1D = parseFloat(element1d.textContent.replace(/,/g, '')); // Fraction
+        var value2D = parseFloat(element2d.textContent.replace(/,/g, ''));
+        var value3D = parseFloat(element3d.textContent.replace(/,/g, ''));
+        var value4D = parseFloat(element4d.textContent.replace(/,/g, '')); // Recurring Charge
+     
+       // ------------------ CALCULATIONS -------------------------------
+     
+        var totalCharge1 = value2A + value3A; // 1st
+        var totalCharge2 = value2B + value3B; // 1st
+        var totalCharge3 = value2C + value3C; // 1st
+        var totalCharge4 = value2D + value3D; // 1st
+     
+     //----------------------
+        const LADRM = 1000; // dummy value
+        const PenalityRM = 200; // dummy value
+     
+        var netTotal1 = totalCharge1 - LADRM - PenalityRM;
+        var netTotal2 = totalCharge2 - LADRM - PenalityRM;
+        var netTotal3 = totalCharge3 - LADRM - PenalityRM;
+        var netTotal4 = totalCharge4 - LADRM - PenalityRM;
+     
+     // -----------------------------------------
+     
+        var FixedCharge1 = value1A*value4A;
+        var FixedCharge2 = value1B*value4B;
+        var FixedCharge3 = value1C*value4C;
+        var FixedCharge4 = value1D*value4D;
+         
+     // ------------------------------------------------------
+     
+        var total2Charge1 = value3A + FixedCharge1;
+        var total2Charge2 = value3B + FixedCharge2;
+        var total2Charge3 = value3C + FixedCharge3;
+        var total2Charge4 = value3D + FixedCharge4;
+     
+     //-----------------------------------------------------------
+     
+        var net2Total1 = total2Charge1 - LADRM - PenalityRM;
+        var net2Total2 = total2Charge2 - LADRM - PenalityRM;
+        var net2Total3 = total2Charge3 - LADRM - PenalityRM;
+        var net2Total4 = total2Charge4 - LADRM - PenalityRM;
+     
+     //-----------------------------------------------------------
+     
+        // Display the result inside the <td>
+        var Out1A = document.getElementById('Out1A');
+        Out1A.textContent = value1A.toFixed(6);
+        var Out2A = document.getElementById('Out2A');
+        Out2A.textContent = totalCharge1.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","); // second row
+        var Out3A = document.getElementById('Out3A');
+        Out3A.textContent = netTotal1.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out4A = document.getElementById('Out4A');
+        Out4A.textContent = FixedCharge1.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out5A = document.getElementById('Out5A');
+        Out5A.textContent = total2Charge1.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out6A = document.getElementById('Out6A');
+        Out6A.textContent = net2Total1.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     
+        var Out1B = document.getElementById('Out1B');
+        Out1B.textContent = value1B.toFixed(6);
+        var Out2B = document.getElementById('Out2B');
+        Out2B.textContent = totalCharge2.toFixed(2);
+        var Out3B = document.getElementById('Out3B');
+        Out3B.textContent = netTotal2.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out4B = document.getElementById('Out4B');
+        Out4B.textContent = FixedCharge2.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out5B = document.getElementById('Out5B');
+        Out5B.textContent = total2Charge2.toFixed(0);
+        var Out6B = document.getElementById('Out6B');
+        Out6B.textContent = net2Total2.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     
+        var Out1C = document.getElementById('Out1C');
+        Out1C.textContent = value1C.toFixed(6);
+        var Out2C = document.getElementById('Out2C');
+        Out2C.textContent = totalCharge3.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out3C = document.getElementById('Out3C');
+        Out3C.textContent = netTotal3.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out4C = document.getElementById('Out4C');
+        Out4C.textContent = FixedCharge3.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out5C = document.getElementById('Out5C');
+        Out5C.textContent = total2Charge3.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out6C = document.getElementById('Out6C');
+        Out6C.textContent = net2Total3.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     
+        var Out1D = document.getElementById('Out1D');
+        Out1D.textContent = value1D.toFixed(6);
+        var Out2D = document.getElementById('Out2D');
+        Out2D.textContent = totalCharge4.toFixed(2);
+        var Out3D = document.getElementById('Out3D');
+        Out3D.textContent = netTotal4.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out4D = document.getElementById('Out4D');
+        Out4D.textContent = FixedCharge4.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out5D = document.getElementById('Out5D');
+        Out5D.textContent = total2Charge4.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        var Out6D = document.getElementById('Out6D');
+        Out6D.textContent = net2Total4.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     
+     //Out1D.textContent = value1D.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
